@@ -130,7 +130,7 @@ const verify_commune = () => {
 const verify_sector = () => {
     return sector_input.value.trim().length <= 100 
     ? "" 
-    : "El sector tiene un largo máximo es 100 caracteres."; 
+    : "Debe ingresar un sector con largo máximo de 100 caracteres."; 
 };
 
 const verify_contact_name = () => {
