@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+    <head>
+        <title>Agregar Aviso</title>
+        <meta charset="UTF-8"/>
+        <link rel="stylesheet" href="../css/add.css"> 
+        <link rel="stylesheet" href="../css/style.css">   
+    </head>
+
+    <body>
+        <header>
+            <nav class="navbar">
+                <h1 class="navbar-title">¡ADOPTA TU MASCOTA!</h1>
+                <ul>
+                    <li><a class="navbar-links" href="../html/add.html">Agregar aviso de adopción</a></li>
+                    <li><a class="navbar-links" href="../html/posts.html">Ver listado de adopciones</a></li>
+                    <li><a class="navbar-links" href="../html/statistics.html">Estadísticas</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <div class="data-form">
+            <h2 id="form-title">Formulario de adopción</h2>
+    
+            <form>
+            <div class="location-data">
+                    <h3>Ubicación: </h3>
+                    <div class="form-group">
+                        <label for="region">Región</label>
+                        <select name="region" id="region">
+                            <option value="None" selected disabled>Elige una región</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="commune">Comuna</label>
+                        <select name="commune" id="commune">
+                            <option value="None" selected disabled>Elige una comuna</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="sector">Sector</label>
+                        <input type="text" id="sector" placeholder="Santiago Centro" maxlength="100">
+                    </div>
+            </div>
+
+            <hr>
+
+            <div class="contact-data">
+                    <h3>Datos de contacto: </h3>
+                    <div class="form-group">
+                        <label for="contact-name">Nombre</label>
+                        <input type="text" name="contact-name" id="contact-name" placeholder="Ej: Anish" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contact-email">Correo electrónico</label>
+                        <input type="email" name="contact-email" id="contact-email" placeholder="Ej: ejemplo@gmail.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contact-telephone">Número de teléfono</label>
+                        <input type="tel" name="contact-telephone" id="contact-telephone" placeholder="Ej: +569.12345678">
+                    </div>
+
+                    <div class="form-group" id="communication-option">
+                        <label for="contact-channels">Medios de comunicación</label>
+                        <select name="contact-channels" id="contact-channels">
+                            <option value="None" selected disabled>Medio de contacto</option>
+                            <option value="Whatsapp">Whatsapp</option>
+                            <option value="Telegram">Telegram</option>
+                            <option value="X">X</option>
+                            <option value="Instagram">Instagram</option>
+                            <option value="TikTok">TikTok</option>
+                            <option value="Otro">Otro</option>
+                        </select>
+                        <input type="text" name="contact-id-or-url" id="contact-id-or-url" placeholder="ID O URL" hidden>
+                        <button class="add-option" id="add-contact-channel" type="button">+</button>
+                    </div>
+            </div>
+
+            <hr>
+
+            <div class="pet-data">
+                <h3>Información de la mascota: </h3>
+                    <div class="form-group">
+                        <label for="pet-type">Tipo</label>
+                        <select name="pet-type" id="pet-type">
+                            <option value="None" selected>Tipo</option>
+                            <option value="Perro">Perro</option>
+                            <option value="Gato">Gato</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pet-qty">Cantidad</label>
+                        <input type="number" name="pet-qty" placeholder="Ej: 1" id="pet-qty" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pet-age">Edad</label>
+                        <input type="number" name="pet-age" id="pet-age" placeholder="Ej: 1" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pet-age-dimension">Unidad de medida</label>
+                        <select name="pet-age-dimension" id="pet-age-dimension">
+                            <option value="None" selected disabled>Elija una unidad de medida</option>
+                            <option value="Meses">Meses</option>
+                            <option value="Años">Años</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pet-delivery-date">Fecha de entrega</label>
+                        <input type="datetime-local" name="pet-delivery-date" id="pet-delivery-date" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pet-description">Descripción</label>
+                        <textarea name="pet-description" id="pet-description" placeholder="Ej: Perro alto/bajo blanco/color..." cols="50" rows="10"></textarea>
+                    </div>
+                    <div id="pet-image-upload">
+                        <div class="form-group file-upload">
+                            <label for="pet-image">Suba imagen(es)</label>
+                            <input type="file" name="pet-image" id="pet-image" accept="image/*" required>
+                            <button class="add-option" id="add-pet-images" type="button" style="color: chocolate;">Agregar otra foto</button>
+                        </div>
+                    </div>
+            </div>
+
+            <div id="post-errors" style="display: none;">
+                <span id="close-errors">&times;</span>
+                <ul id="errors-list">
+    
+                </ul>
+            </div>
+
+            <button type="button" id="submit-post">Agregar este aviso de adopción</button>
+            </form>
+
+        </div>
+
+        <div id="confirm-post" style="display: none;">
+            <h3>¿Está seguro que desea agregar este aviso de adopción?</h3>
+            <button type="button" id="confirm-add-post-btn">Sí, estoy seguro</button>
+            <button type="button" id="deny-add-post-btn">No, no estoy seguro, quiero volver al formulario</button>
+        </div> 
+
+        <div id="post-confirmed" style="display: none;">
+            <h3>Hemos recibido la información de adopción, muchas gracias y suerte!</h3>
+            <button type="button" style="color: chocolate;" onclick="document.location='../html/index.html'">Volver a la portada</button>
+        </div>
+
+        <script src="../js/avisos.js"></script>
+        <script src="../js/region_comuna.js"></script>
+    </body>
+</html>
+
