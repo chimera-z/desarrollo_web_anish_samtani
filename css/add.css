@@ -18,7 +18,8 @@
 }
 
 .form-group input,
-.form-group select{
+.form-group select,
+.form-group textarea{
     margin: 0.5vh 0.5vh;
     padding: 0.2rem 0.5rem;
     border: 1px solid #ced4da;
