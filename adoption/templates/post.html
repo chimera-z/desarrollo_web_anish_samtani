@@ -89,6 +89,7 @@
                         <img class="zoomed-img" id="zoomed-img-{{img_filename[0]}}" alt="post-zoomed-img" src="{{ img_filename[1] | resize('800x900', fill=1) }}" hidden>
                     {% endfor %}
                 </div>
+            </div>
         {% else %}
             <p style="text-align:center;"> El aviso no fue encontrado </p>
         {% endif %}
