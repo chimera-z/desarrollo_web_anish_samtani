@@ -2,20 +2,21 @@
 
 ## Estructura Tarea 2:
 - `adoption/`: Contiene la aplicación de flask.
-- `database/`: Archivos relacionados a la base de datos.
-  - `database/db.py`: Genera la sesión para leer y editar la BD.
-  - `database/queries.py`; Contine las consultas relacionadas al uso de la BD de la aplicación.
-  - `database/tables.py`: Establece los modelos de las tablas.
-  - `database/region-comuna.sql`: Carga los datos de región y comuna en la BD.
-  - `database/tarea2.sql`: Crea el esquema y la tabla de la BD usada.
-- `static/css`: Contiene los archivo css.
-- `static/js`: Contiene los archivos javascript.
-- `static/templates`: Contiene los templates de HTML que usan Jinja2.
-- `static/images`: Contiene las imagenes usadas en la página web.
-- `utils/form.py`: Procesa el formulario rellenado por el usuario, validando y estableciendo el formato de la entrada.
-- `app.py`: Configuración de rutas y aplicación web.
+  - `database/`: Archivos relacionados a la base de datos.
+    - `db.py`: Genera la sesión para leer y editar la BD.
+    - `queries.py`; Contine las consultas relacionadas al uso de la BD de la aplicación.
+    - `tables.py`: Establece los modelos de las tablas.
+    - `region-comuna.sql`: Carga los datos de región y comuna en la BD.
+    - `tarea2.sql`: Crea el esquema y la tabla de la BD usada.
+  - `static/`: Contiene los archivos estáticos.
+    - `css`: Contiene los archivo css.
+    - `js`: Contiene los archivos javascript.
+    - `templates`: Contiene los templates de HTML que usan Jinja2.
+    - `images`: Contiene las imagenes usadas en la página web.
+    - `utils/form.py`: Procesa el formulario rellenado por el usuario, validando y estableciendo el formato de la entrada.
+  - `app.py`: Configuración de rutas y aplicación web.
 ## Consideraciones Tarea 2:
-
+Para obtener las imagenes en los tres tamaños pedidos, utilize flask_resize, que se encarga de guardar y generar los archivos en `adoption/static/imgs/uploads/resized-images` de manera directa.
 
 ---
 
