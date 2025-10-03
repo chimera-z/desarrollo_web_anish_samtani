@@ -16,3 +16,4 @@ build/
 tests/
 adoption/static/imgs/uploads/resized-imgs
 adoption/static/imgs/uploads/*.png
+test.png
