@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+
+<head>
+    <title>Portada</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/list.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+</head>
+
+<body>
+    <header>
+        {% include "navbar.html" %}
+    </header>
+
+    <main class="main-container">
+        <div class="welcome-box">
+        <h2 class="welcome-message">
+            {% if message %}
+                Tu aviso fue agregado exitosamente. Puedes seguir navegando la página web.
+            {% else %}
+                Bienvenido a la mejor página de adopción de perros y gatos. 
+                A continuación se presentan los 5 últimos avisos de adopción. 
+                Para ver o publicar avisos de adopción y estadísticas interesantes 
+                dirígete al menú.
+            {% endif %}
+         </h2>
+         </div>
+        <section class="last-posts">
+            {% if posts %}
+                {% for post in posts %}
+                <div class="post-container">
+                    <img class="post-img" src="{{ post['img_filenames'][0][1] | resize('260x260', fill=1) }}" alt="Imagen mascota {{post['img_filenames'][0][0]}}">
+                    <h3 class="post-title">{{post['qty']}} {{post['type']}} de {{post['age']}} {{post['dimension']}}</h3>
+                    <time class="post-date">{{post['publication_date']}}</time>
+                    <p class="post-info">Comuna: {{post['commune']}} - Sector: {{post['sector']}}</p>
+                </div>
+                {% endfor %}
+            {% else %} <p>No hay avisos aún</p> {% endif %}
+
+        </section>
+        {#
+        <section class="last-posts">
+            <div class="post-container">
+                <img alt="Perro blanco y café" class="post-img" src="../imgs/Perro1_320x240.webp">
+                <h3 class="post-title">1 perro de 1 año</h3>
+                <time class="post-date">2025-08-18 12:00</time>
+                <p class="post-info">Comuna: Santiago - Sector: Fantasilandia</p>
+            </div>
+
+            <div class="post-container">
+                <img alt="Perro negro y café" class="post-img" src="../imgs/Perro2_320x240.webp">
+                <h3 class="post-title">1 perro de 10 años</h3>
+                <time class="post-date">2025-01-18 17:00</time>
+                <p class="post-info">Comuna: Puente Alto - Sector: Esquina</p>
+            </div>
+
+            <div class="post-container">
+                <img alt="Gatos café y gris" class="post-img" src="../imgs/Gato1_320x240.webp">
+                <h3 class="post-title">2 gatos de 1 mes</h3>
+                <time class="post-date">2025-01-18 19:00</time>
+                <p class="post-info">Comuna: Colchane - Sector: Basural</p>
+            </div>
+
+            <div class="post-container">
+                <img alt="Perro naranjo" class="post-img" src="../imgs/Perro3_320x240.webp">
+                <h3 class="post-title">1 perro de 3 años</h3>
+                <time class="post-date">2025-01-18 19:00</time>
+                <p class="post-info">Comuna: Colchane - Sector: Basural</p>
+            </div>
+
+            <div class="post-container">
+                <img alt="Perro negro" class="post-img" src="../imgs/Perro4_320x240.webp">
+                <h3 class="post-title">1 perro de 5 años</h3>
+                <time class="post-date">2025-08-25 00:00</time>
+                <p class="post-info">Comuna: Iquique - Sector: Sur</p>
+            </div>
+        </section>
+        #}
+    </main>
+</body>
+</html>

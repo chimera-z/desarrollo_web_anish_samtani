@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+    <head>
+        <title>Estadísticas</title>
+        <meta charset="UTF-8"/>
+        <link rel="stylesheet" href=" {{ url_for('static', filename = 'css/style.css') }} ">
+        <link rel="stylesheet" href=" {{ url_for('static', filename = 'css/list.css') }} ">    
+    </head>
+
+    <body>
+        <header>
+            {% include "navbar.html" %}
+        </header>
+        
+        <div class="post-container">
+            <img src="{{ url_for('static', filename = 'imgs/avisos_por_dia.png') }}" alt="Gráfico de avisos por día">
+        </div>
+        <div class="post-container">
+            <img src="{{ url_for('static', filename = 'imgs/avisos_por_tipo.png') }}" alt="Gráfico de avisos por tipo">
+        </div>
+        <div class="post-container">
+            <img src="{{ url_for('static', filename = 'imgs/avisos_por_tipo.png') }}" alt="Gráfico de avisos por mes">
+        </div>
+
+        <a href="{{ url_for('home') }}" class="go-back-to-main-page">Volver a la portada</a>
+    </body>
+</html>

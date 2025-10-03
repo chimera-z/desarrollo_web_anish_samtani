@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+    <head>
+        <title>Avisos</title>
+        <meta charset="UTF-8"/>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">   
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/list.css') }}">   
+    </head>
+
+    <body>
+        <header>
+            {% include "navbar.html" %}
+        </header>
+
+        {% if posts %}
+        <div class="posts">
+            {% for post in posts %}
+            <a href="{{ url_for('show_post', post_id=post['id']) }}" class="post-link">
+                <div class="post-container" data-post-id="{{post['id']}}">
+                    <img class="post-img" src="{{ post['img_filenames'][0][1] | resize('320x240', fill=1) }}" alt="Imagen mascota {{post['img_filenames'][0][0]}}">
+                    <h3 class="post-title">
+                        {{post['qty']}} {{post['type']}} de {{post['age']}} {{post['dimension']}}
+                    </h3>
+                    <time class="post-date"> {{post['publication_date']}} </time>
+                    <p class="post-info">
+                        Comuna: {{post['commune']}} - Sector: {{post['sector']}}
+                    </p>
+                </div>
+                {% endfor %}
+            </a>
+        </div>
+
+        <div class="pagination-bar">
+            {% if curr_page == 1 %}
+                <button type="button" class="page-navigation" disabled>&larr;</button>
+            {% else %}
+                <button type="button" class="page-navigation" onclick="window.location.href='{{ url_for('list_posts', page=curr_page - 1) }}'">&larr;</button>
+            {% endif %}
+            
+            <span id="page-number">Página {{curr_page}} de {{number_of_pages}}</span>
+
+            {% if curr_page == number_of_pages %}
+                <button type="button" class="page-navigation" disabled>&rarr;</button>
+            {% else %}
+                <button type="button" class="page-navigation" onclick="window.location.href='{{ url_for('list_posts', page=curr_page + 1) }}'">&rarr;</button>
+            {% endif %}
+        </div>
+
+        {% else %}
+
+        <p style="text-align:center;">No hay avisos aún</p> 
+
+        {% endif %}
+
+    </body>
+</html>
