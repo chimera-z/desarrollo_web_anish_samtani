@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, flash
 from utils.form import verify_form
 from database.queries import add_post, get_last_posts, get_number_of_posts, get_post, get_posts
 import os
@@ -16,7 +16,8 @@ app.config['MAX_CONTENT_LENGTH'] = 16 * 1000 * 1000
 resize = flask_resize.Resize(app)
 
 @app.route("/", methods=["GET"])
-def home(message = None):
+def home():
+    message = request.args.get("message")
     last_posts = get_last_posts(5)
     return render_template("index.html", posts=last_posts, message = message)
 
@@ -32,7 +33,7 @@ def add():
             added_post = add_post(data)
 
             if added_post:
-                return redirect(url_for('home', message="¡Aviso agregado correctamente!"))
+                return redirect(url_for('home', message="¡Aviso agregado exitosamente!"))
             else:
                 return render_template("add.html", errors=["No se pudo agregar el aviso. Vuelva a intentarlo."])
         

@@ -54,17 +54,25 @@ def verify_fields(form: dict) -> tuple[list[str], dict]:
     contact_channels = []
     contact_id_or_url = []
     for i in range(1, 6):
-        if form.get(f"contact-channels-{i}"):
-            if form[f"contact-channels-{i}"] in valid_cc:
-                if form.get(f"contact-id-or-url-{i}") and not (4 <= len(form[f"contact-id-or-url-{i}"]) <= 50):
-                    errors.append("Debe ingresar una ID o URL válida.")
-                    break
-                else:
-                    contact_channels.append(form[f"contact-channels-{i}"])
-                    contact_id_or_url.append(form[f"contact-id-or-url-{i}"])
-            else:
-                errors.append("Debe seleccionar un medio válido.")
-                break
+        channel = form.get(f"contact-channels-{i}")
+        contact = form.get(f"contact-id-or-url-{i}", "").strip()
+
+        if not channel:
+            continue  
+
+        if channel not in valid_cc:
+            errors.append("Debe seleccionar un medio válido.")
+            break
+
+        if not contact:
+            continue 
+
+        if not (4 <= len(contact) <= 50):
+            errors.append("Debe ingresar una ID o URL válida.")
+            break
+
+        contact_channels.append(channel)
+        contact_id_or_url.append(contact)
     
     # verify pet type
     p_type: str = form['pet-type']
