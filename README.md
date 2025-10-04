@@ -16,8 +16,8 @@
     - `utils/form.py`: Procesa el formulario rellenado por el usuario, validando y estableciendo el formato de la entrada.
   - `app.py`: Configuración de rutas y aplicación web.
 ## Consideraciones Tarea 2:
-Para obtener las imagenes en los tres tamaños pedidos, utilize flask_resize, que se encarga de guardar y generar los archivos en `adoption/static/imgs/uploads/resized-images` de manera directa.
-
+- Para obtener las imagenes en los tres tamaños pedidos, utilize flask_resize, que se encarga de guardar y generar los archivos en `adoption/static/imgs/uploads/resized-images` de manera directa.
+- En caso de no tener información de un campo opcional se deja en blanco su respectivo espacio.
 ---
 
 **Estructura Tarea 1:**
