@@ -29,16 +29,18 @@
 
         <div id="error-msg"></div>
 
-        <div class="post-container">
-            <canvas id="posts-per-day-graph" style="width:100%;max-width:1000px"></canvas>
-        </div>
+        <div id="graphs" style="display: block;">
+            <div class="post-container">
+                <canvas id="posts-per-day-graph" style="width:100%;max-width:1000px"></canvas>
+            </div>
 
-        <div class="post-container">
-            <canvas id="posts-per-type-graph" style="width:100%;max-width:600px"></canvas>
-        </div>
+            <div class="post-container">
+                <canvas id="posts-per-type-graph" style="width:100%;max-width:600px"></canvas>
+            </div>
 
-        <div class="post-container">
-            <canvas id="posts-per-month-graph" style="width:100%;max-width:1000px"></canvas>
+            <div class="post-container">
+                <canvas id="posts-per-month-graph" style="width:100%;max-width:1000px"></canvas>
+            </div>
         </div>
 
         <a href="{{ url_for('home') }}" class="go-back-to-main-page">Volver a la portada</a>

@@ -18,6 +18,8 @@ async function get_stats() {
         }
     } catch (error) {
         document.getElementById("error-msg").innerText = "No se pudieron cargar las estadísticas.";
+        document.getElementById("error-msg").style = "text-align: center;"
+        document.getElementById("graphs").style = "display: none;"
         console.error('Error:', error); 
     }
 }
