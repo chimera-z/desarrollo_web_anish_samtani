@@ -76,8 +76,8 @@ async function load_comments () {
         }
         const comms = await response.json();
         prev_comment_section.innerHTML = '';
-
-        if (comms.data == []) {
+        if (comms.data.length == 0) {
+            console.log("No comments found for this post.")
             mess = document.createElement('p');
             mess.innerHTML = 'No hay comentarios en este aviso.';
             prev_comment_section.appendChild(mess);
@@ -114,6 +114,6 @@ async function load_comments () {
 };
 
 
-window.onload = load_comments;
+window.onload = load_comments();
 close_error_box_btn.addEventListener('click', close_error_box);
 add_comment_btn.addEventListener("click", validate_comment);
