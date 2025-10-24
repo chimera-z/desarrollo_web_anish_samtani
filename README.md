@@ -26,7 +26,7 @@
 - No se agregaron cabeceras para permitir CORS, pues no se busca un uso externo de las APIs.
 
 
---
+---
 
 ## Estructura Tarea 2:
 - `adoption/`: Contiene la aplicación de flask.
