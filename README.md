@@ -17,7 +17,7 @@
   - `app.py`: Configuración de rutas y aplicación web.
 ## Consideraciones Tarea 3:
 - Todo tipo de solicitud en el lado del cliente es realizado usando `fetch()` como sugirio el auxiliar.
-- Las rutas que solo retornan información en formato JSON los hice en la ruta `\api\`, manteniendo un formato consistente en el JSON retornado.
+- Las rutas que solo retornan información en formato JSON los hice en la ruta `/api/`, manteniendo un formato consistente en el JSON retornado.
 - Para la generación de gráficos utilize [ChartJS](https://www.chartjs.org), pues es open source, gratis y tiene una API simple. 
 - Las estadisticas necesarias para generar los gráficos se obtienen de una unica ruta: `/api/stats`
 - En el gráfico de avisos de adopción por mes y tipo de mascota, para diferenciar los mismos meses de distintos años, se gráfica el `Año-Mes`. De esta manera, el gráfico representa la misma información más claramente.
