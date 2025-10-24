@@ -10,4 +10,4 @@ Este repositorio contiene dos versiones de un proyecto de **Plataforma de Adopci
   Esta versión utiliza **Flask** con **plantillas Jinja**, integrando una **base de datos** para almacenar y mostrar publicaciones de adopción. Mantiene la misma estructura de frontend, pero añade **renderizado del lado del servidor**, contenido dinámico y gestión de datos con base de datos (**SQL**).
 
 - [**Rama `Tarea-3` – Fetch**](https://github.com/chimera-z/desarrollo_web_anish_samtani/tree/Tarea-3)
-  Esta version agrega funcionalidades basadas en fetch y funciones asíncronas.
+  Esta version agrega funcionalidades basadas en fetch y funciones asíncronas. De esta manera, se implemento la generación ge gráficos de manera dinámica y la capacidad de agregar y leer comentarios en un aviso.
