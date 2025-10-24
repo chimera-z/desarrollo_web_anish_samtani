@@ -34,6 +34,15 @@ class ContactBy(Base):
     identificador = Column(String(150))
     aviso_id = Column(ForeignKey("aviso_adopcion.id"))
 
+class Comment(Base):
+    __tablename__ = "comentario"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    nombre = Column(String(80))
+    texto = Column(String(300))
+    fecha = Column(DateTime)
+    aviso_id = Column(ForeignKey("aviso_adopcion.id"))
+
 class AdoptionPost(Base):
     __tablename__ = "aviso_adopcion"
 
@@ -54,6 +63,7 @@ class AdoptionPost(Base):
     commune = relationship("Commune")
     photos = relationship("Photo")     
     contacts = relationship("ContactBy") 
+    comments = relationship("Comment")
 
 def init_db():
     Base.metadata.create_all(engine)

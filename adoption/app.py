@@ -1,6 +1,6 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, jsonify
 from utils.form import verify_form
-from database.queries import add_post, get_last_posts, get_number_of_posts, get_post, get_posts
+from database.queries import *
 import os
 import flask_resize
 import math
@@ -56,10 +56,38 @@ def list_posts():
 def stats():
     return render_template("statistics.html")
 
-@app.route("/post/<int:post_id>")
+@app.route("/post/<int:post_id>", methods=["GET"])
 def show_post(post_id):
     post_data = get_post(post_id)
-    return render_template("post.html", data=post_data)
+    return render_template("post.html", pdata = post_data)
 
+@app.route("/api/stats/", methods=["GET"])
+def get_stats():
+    return jsonify({
+        'data': {
+            "byDate": get_number_of_posts_per_date(),
+            "byType": get_number_of_posts_by_type(),
+            "byMonthAndType": get_posts_type_per_month()
+        },
+        "status": "ok",
+        "error": None
+    }), 200
 
+@app.post("/api/comment")
+def add_comment():
+    post_id = request.form.get('pid')
+    cname = request.form.get('name')
+    ctext = request.form.get('comment')
+    print(f"Adding comment {ctext} from {cname} to post {post_id}")
 
+    if not (post_id and cname and ctext and 3 <= len(cname) <= 80 and 5 <= len(ctext) <= 300):
+        return jsonify({"status": "error", "data": None, "error": "Entrada inválida."}), 400
+    
+    if add_comment_to_post(post_id, cname, ctext):
+        return jsonify({"status": "ok", "data": {"post_id": post_id, "name": cname}, "error": None}), 200
+            
+    return jsonify({"status": "error", "data": None, "error": "No se pudo guardar el comentario."}), 400
+
+@app.get("/api/comment/<int:post_id>")
+def get_comments(post_id):
+    return jsonify({"status": "ok", "data": get_post_comments(post_id), "error": None}), 200

@@ -1,8 +1,9 @@
-from sqlalchemy import select, insert
+from sqlalchemy import desc
+from sqlalchemy.sql import func
 from datetime import datetime
 from .db import SessionLocal as Session
 import os
-from .tables import Region, Commune, AdoptionPost, Photo, ContactBy, init_db
+from .tables import Region, Commune, AdoptionPost, Photo, ContactBy, Comment, init_db
 from sqlalchemy.exc import SQLAlchemyError
 
 UPLOAD_FOLDER = os.path.join(os.getcwd(), "static/imgs/uploads")
@@ -98,7 +99,7 @@ def add_post(data: dict) -> bool:
         session.commit()
     except SQLAlchemyError as e:
         session.rollback()
-        print(f"Database error in get_post: {e}")
+        print(f"Database error in add_post: {e}")
         return False
     finally:
         session.close()
@@ -137,5 +138,92 @@ def get_posts(n, offset):
         
     return posts_data
 
-if __name__ == "__main__":
-    print(get_post(8))
+def get_number_of_posts_per_date():
+    sess = Session()
+    try: 
+        results = (
+            sess.query(
+                func.date(AdoptionPost.fecha_ingreso).label("date"),
+                func.count().label("count")
+            )
+            .group_by(func.date(AdoptionPost.fecha_ingreso))
+            .order_by("date")
+        ).all()
+        return [{"date": str(res[0]), "count": res[1]} for res in results]
+    except SQLAlchemyError as e:
+        print(f"Database error in get_number_of_posts_per_date: {e}")
+        return []
+    finally:
+        sess.close()
+
+def get_number_of_posts_by_type():
+    sess = Session()
+    try: 
+        results = (
+            sess.query(
+                AdoptionPost.tipo,
+                func.count()
+            )
+            .group_by(AdoptionPost.tipo)
+        ).all()
+        return [{"type":res[0], "count":res[1]} for res in results]
+    except SQLAlchemyError as e:
+        print(f"Database error in get_number_of_posts_per_date: {e}")
+        return []
+    finally:
+        sess.close()
+
+def get_posts_type_per_month():
+    sess = Session()
+    try: 
+        results = (
+            sess.query(
+                func.concat(func.concat(func.extract("year", AdoptionPost.fecha_ingreso), "-"), func.extract("month", AdoptionPost.fecha_ingreso)).label("month"),
+                AdoptionPost.tipo,
+                func.count()
+            )
+            .group_by("month", AdoptionPost.tipo)
+            .order_by("month")
+        ).all()
+        months_data = {}
+        for res in results:
+            if not months_data.get(res[0]):
+                months_data[res[0]] = [{"type": res[1], "count": int(res[2])}]
+            else:
+                months_data[res[0]].append({"type": res[1], "count": int(res[2])})
+
+        return months_data
+    except SQLAlchemyError as e:
+        print(f"Database error in get_number_of_posts_per_date: {e}")
+        return []
+    finally:
+        sess.close()
+
+def add_comment_to_post(post_id: int, name: str, text: str) -> bool:
+    with Session() as session:
+        try:
+            new_comment = Comment(
+                nombre=name,
+                texto=text,
+                fecha=datetime.now(),
+                aviso_id=post_id
+            )
+            session.add(new_comment)
+            session.commit()
+            return True
+        except SQLAlchemyError as e:
+            session.rollback()
+            print(f"Database error: {e}")
+            return False
+
+def get_post_comments(post_id: int) -> list:
+    session = Session()
+    try:
+        results = session.query(Comment).where(Comment.aviso_id == post_id).order_by(desc(Comment.fecha)).all()
+        return [{"name": res.nombre, "date": str(res.fecha), "text": res.texto} for res in results]
+    except SQLAlchemyError as e:
+        session.rollback()
+        print(f"Database error in get_post_comments: {e}")
+        return False
+    finally:
+        session.close()

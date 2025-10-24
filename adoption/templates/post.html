@@ -5,6 +5,7 @@
         <meta charset="UTF-8"/>
         <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">   
         <link rel="stylesheet" href="{{ url_for('static', filename='css/post.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/comments.css') }}">
     </head>
 
     <body>
@@ -12,46 +13,46 @@
             {% include "navbar.html" %}
         </header>
 
-        {% if data %}
+        {% if pdata %}
             <div class="post-page-imgs">
-                {% for img_filename in data['img_filenames'] %}
+                {% for img_filename in pdata['img_filenames'] %}
                     <img class="post-img" id="post-img-{{img_filename[0]}}" src="{{ img_filename[1] | resize('320x240', fill=1) }}" alt="Imagen {{img_filename[0]}}">
                 {% endfor %}
             </div>
 
             <div class="post-page-info">
                 <p id="post-page-publication-date">
-                    <strong>Fecha de publicación:</strong> {{data['publication_date']}}
+                    <strong>Fecha de publicación:</strong> {{pdata['publication_date']}}
                 </p>
 
                 <p id="post-page-region">
-                    <strong>Región:</strong> {{data['region']}}
+                    <strong>Región:</strong> {{pdata['region']}}
                 </p>
 
                 <p id="post-page-commune">
-                    <strong>Comuna:</strong> {{data['commune']}}
+                    <strong>Comuna:</strong> {{pdata['commune']}}
                 </p>
 
                 <p id="post-page-sector">
-                    <strong>Sector:</strong> {{data['sector']}}
+                    <strong>Sector:</strong> {{pdata['sector']}}
                 </p>
 
                 <p id="post-page-contact-name">
-                    <strong>Nombre de contacto:</strong> {{data['name']}}
+                    <strong>Nombre de contacto:</strong> {{pdata['name']}}
                 </p>
 
                 <p id="post-page-contact-email">
-                    <strong>Correo electrónico:</strong> {{data['email']}}
+                    <strong>Correo electrónico:</strong> {{pdata['email']}}
                 </p>
 
                 <p id="post-page-phone-number">
-                    <strong>Número de teléfono:</strong> {{data['phone']}}
+                    <strong>Número de teléfono:</strong> {{pdata['phone']}}
                 </p>
 
                 <div id="post-page-contact-channels">
                     <strong>Canales de contacto:</strong>
                     <ul>
-                        {% for cc in data['contact'] %}
+                        {% for cc in pdata['contact'] %}
 
                             <li>{{cc[1]}}: {{cc[2]}} </li>
 
@@ -60,23 +61,23 @@
                 </div>
 
                 <p id="post-page-qty">
-                    <strong>Cantidad:</strong> {{data['qty']}}
+                    <strong>Cantidad:</strong> {{pdata['qty']}}
                 </p>
 
                 <p id="post-page-type">
-                    <strong>Tipo:</strong> {{data['type']}}
+                    <strong>Tipo:</strong> {{pdata['type']}}
                 </p>
 
                 <p id="post-page-age">
-                    <strong>Edad:</strong> {{data['age']}} {{data['dimension']}}
+                    <strong>Edad:</strong> {{pdata['age']}} {{pdata['dimension']}}
                 </p>
 
                 <p id="post-page-due-date">
-                    <strong>Fecha entrega:</strong> {{data['delivery_date']}}
+                    <strong>Fecha entrega:</strong> {{pdata['delivery_date']}}
                 </p>
 
                 <p id="post-page-description">
-                    <strong>Descripción:</strong> {{data['description']}}
+                    <strong>Descripción:</strong> {{pdata['description']}}
                 </p>
 
 
@@ -85,15 +86,60 @@
 
                 <div id="img-viewer" style="display: none;">
                     <span id="close-img" hidden>&times;</span>
-                    {% for img_filename in data['img_filenames'] %}
+                    {% for img_filename in pdata['img_filenames'] %}
                         <img class="zoomed-img" id="zoomed-img-{{img_filename[0]}}" alt="post-zoomed-img" src="{{ img_filename[1] | resize('800x900', fill=1) }}" hidden>
                     {% endfor %}
                 </div>
             </div>
+
+        <hr>
+
+        <div class="comment-section">
+            <h2>Comentarios</h2>
+            <label for="add-comment-name">Nombre</label>
+            <div>
+                <input type="text" name="add-comment-name" id="add-comment-name" required>
+            </div>
+            <label for="add-comment-text">Comentario</label>
+            <div>
+                <textarea name="add-comment-text" id="add-comment-text" cols="50" rows="4" placeholder="¿Tienes algo que decir?" required></textarea>
+            </div>
+            <div id="post-errors" style="display: none;">
+                <span id="close-errors">&times;</span>
+                <ul id="errors-list">
+                </ul>
+            </div>
+            <div>
+                <button id="add-comment">Agregar Comentario</button>
+            </div>
+
+
+
+
+            <div id="prev-comments">
+                <!--
+                {% if cdata %}
+                    {% for comm in cdata %}
+                        <div class="comment">
+                            <div>
+                                <p class="comment-author">{{comm['name']}}</p>
+                                <span class="comment-date">{{comm['date']}}</span>
+                                <p class="comment-text">{{comm['text']}}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p class="comment-text">No hay comentarios en este aviso.</p>
+                {% endif %}
+                -->
+            </div>
+        </div>
+
         {% else %}
             <p style="text-align:center;"> El aviso no fue encontrado </p>
         {% endif %}
 
         <script src="{{ url_for('static', filename='js/post.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/comment.js') }}"></script>
     </body>
 </html>

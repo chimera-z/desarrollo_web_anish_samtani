@@ -1,5 +1,33 @@
 # Tareas CC5002
 
+## Estructura Tarea 3:
+- `adoption/`: Contiene la aplicación de flask.
+  - `database/`: Archivos relacionados a la base de datos.
+    - `db.py`: Genera la sesión para leer y editar la BD.
+    - `queries.py`; Contine las consultas relacionadas al uso de la BD de la aplicación.
+    - `tables.py`: Establece los modelos de las tablas.
+    - `region-comuna.sql`: Carga los datos de región y comuna en la BD.
+    - `tarea2.sql`: Crea el esquema y la tabla de la BD usada.
+  - `static/`: Contiene los archivos estáticos.
+    - `css`: Contiene los archivo css.
+    - `js`: Contiene los archivos javascript.
+    - `templates`: Contiene los templates de HTML que usan Jinja2.
+    - `images`: Contiene las imagenes usadas en la página web.
+    - `utils/form.py`: Procesa el formulario rellenado por el usuario, validando y estableciendo el formato de la entrada.
+  - `app.py`: Configuración de rutas y aplicación web.
+## Consideraciones Tarea 3:
+- Todo tipo de solicitud en el lado del cliente es realizado usando `fetch()` como sugirio el auxiliar.
+- Las rutas que solo retornan información en formato JSON los hice en la ruta `\api\`, manteniendo un formato consistente en el JSON retornado.
+- Para la generación de gráficos utilize [ChartJS](https://www.chartjs.org), pues es open source, gratis y tiene una API simple. 
+- Las estadisticas necesarias para generar los gráficos se obtienen de una unica ruta: `/api/stats`
+- En el gráfico de avisos de adopción por mes y tipo de mascota, para diferenciar los mismos meses de distintos años, se gráfica el `Año-Mes`. De esta manera, el gráfico representa la misma información más claramente.
+
+- El proyecto usa SQLAlchemy ORM para todas las operaciones de base de datos, eliminando el riesgo de inyección SQL. Además, todas las plantillas HTML usan Jinja2, que escapa automáticamente el contenido, previniendo inyección de scripts (XSS)
+- No se agregaron cabeceras para permitir CORS, pues no se busca un uso externo de las APIs.
+
+
+--
+
 ## Estructura Tarea 2:
 - `adoption/`: Contiene la aplicación de flask.
   - `database/`: Archivos relacionados a la base de datos.
@@ -18,6 +46,7 @@
 ## Consideraciones Tarea 2:
 - Para obtener las imagenes en los tres tamaños pedidos, utilize flask_resize, que se encarga de guardar y generar los archivos en `adoption/static/imgs/uploads/resized-images` de manera directa.
 - En caso de no tener información de un campo opcional se deja en blanco su respectivo espacio.
+
 ---
 
 **Estructura Tarea 1:**

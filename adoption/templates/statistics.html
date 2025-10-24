@@ -4,7 +4,8 @@
         <title>Estadísticas</title>
         <meta charset="UTF-8"/>
         <link rel="stylesheet" href=" {{ url_for('static', filename = 'css/style.css') }} ">
-        <link rel="stylesheet" href=" {{ url_for('static', filename = 'css/list.css') }} ">    
+        <link rel="stylesheet" href=" {{ url_for('static', filename = 'css/list.css') }} ">   
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
     </head>
 
     <body>
@@ -12,6 +13,7 @@
             {% include "navbar.html" %}
         </header>
         
+        <!-- STATIC GRAPHS
         <div class="post-container">
             <img src="{{ url_for('static', filename = 'imgs/avisos_por_dia.png') }}" alt="Gráfico de avisos por día">
         </div>
@@ -21,7 +23,27 @@
         <div class="post-container">
             <img src="{{ url_for('static', filename = 'imgs/avisos_por_tipo.png') }}" alt="Gráfico de avisos por mes">
         </div>
+        -->
+
+        <!-- DYNAMIC GRAPH -->
+
+        <div id="error-msg"></div>
+
+        <div class="post-container">
+            <canvas id="posts-per-day-graph" style="width:100%;max-width:1000px"></canvas>
+        </div>
+
+        <div class="post-container">
+            <canvas id="posts-per-type-graph" style="width:100%;max-width:600px"></canvas>
+        </div>
+
+        <div class="post-container">
+            <canvas id="posts-per-month-graph" style="width:100%;max-width:1000px"></canvas>
+        </div>
 
         <a href="{{ url_for('home') }}" class="go-back-to-main-page">Volver a la portada</a>
+        
+
+        <script src="{{ url_for('static', filename='js/stats.js') }}"></script>
     </body>
 </html>
