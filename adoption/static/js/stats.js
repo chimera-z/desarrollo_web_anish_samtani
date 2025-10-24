@@ -110,7 +110,7 @@ const plot_posts_per_month_and_type = (data_by_month_and_type) => {
     new Chart(g3, {
         type: "bar",
         data: {
-            labels: Object.keys(data_by_month_and_type),
+            labels: months,
             datasets: [
                 {
                     label: "Perro",
