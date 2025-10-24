@@ -9,7 +9,7 @@
     - `region-comuna.sql`: Carga los datos de región y comuna en la BD.
     - `tarea2.sql`: Crea el esquema y la tabla de la BD usada.
   - `static/`: Contiene los archivos estáticos.
-    - `css`: Contiene los archivo css.
+    - `css`: Contiene los archivos css.
     - `js`: Contiene los archivos javascript.
     - `templates`: Contiene los templates de HTML que usan Jinja2.
     - `images`: Contiene las imagenes usadas en la página web.
